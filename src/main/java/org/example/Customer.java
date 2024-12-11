@@ -14,9 +14,8 @@ public class Customer implements Runnable {
         try {
             cashier.payForFuel(fuelAmount);
             Pump pump = cashier.getAvailablePump();
-            if (pump != null) {
-                pump.startPumping(fuelAmount);
-            }
+            pump.startPumping(fuelAmount);
+            cashier.releasePump(pump);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }

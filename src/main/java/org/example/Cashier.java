@@ -1,24 +1,27 @@
 package org.example;
 
+import java.util.Arrays;
+import java.util.concurrent.ArrayBlockingQueue;
+
 public class Cashier {
-    private final Pump[] pumps;
+    private final ArrayBlockingQueue<Pump> availablePumps;
 
     public Cashier(Pump[] pumps) {
-        this.pumps = pumps;
+        this.availablePumps = new ArrayBlockingQueue<>(3);
+        availablePumps.addAll(Arrays.asList(pumps));
     }
 
     public synchronized void payForFuel(int fuelAmount) throws InterruptedException {
-        long threadId = Thread.currentThread().threadId();
         System.out.println(Thread.currentThread().getName() + " платит за " + fuelAmount + " единиц топлива");
         Thread.sleep(100); // ждем окончания оплаты
+        System.out.println(Thread.currentThread().getName() + " окончил оплату");
     }
 
-    public synchronized Pump getAvailablePump() {
-        for (Pump pump : pumps) {
-            if (pump.isAvailable()) {
-                return pump;
-            }
-        }
-        return null;
+    public Pump getAvailablePump() throws InterruptedException {
+        return availablePumps.take();
+    }
+
+    public void releasePump(Pump pump) {
+        availablePumps.offer(pump);
     }
 }
