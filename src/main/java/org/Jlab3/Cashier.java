@@ -13,12 +13,15 @@ public class Cashier {
         this.totalMoney = 0;
     }
 
-    public synchronized void payForFuel(int fuelAmount) throws InterruptedException {
+    public synchronized void payForFuel(int fuelAmount, Customer customer) throws InterruptedException {
         int payment = fuelAmount * 10;
-        System.out.println(Thread.currentThread().getName() + " платит " + payment + " за " + fuelAmount + " единиц топлива");
+        System.out.println(Thread.currentThread().getName() + " платит " + payment + " за " + fuelAmount +
+                " единиц топлива, до оплаты у него есть " + customer.getMoney());
         Thread.sleep(100);
         totalMoney += payment;
-        System.out.println(Thread.currentThread().getName() + " окончил оплату. Сейчас в кассе " + totalMoney);
+        customer.payMoney(payment);
+        System.out.println(Thread.currentThread().getName() + " окончил оплату. Сейчас в кассе " + totalMoney +
+                ", а у клиента осталось " + customer.getMoney());
     }
 
     public Pump getAvailablePump() throws InterruptedException {

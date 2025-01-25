@@ -12,7 +12,8 @@ public class GasStation {
         Thread customerThread = new Thread(() -> {
             while (true) {
                 int fuelAmount = rand.nextInt(5) + 1;
-                Customer customer = new Customer(cashier, fuelAmount);
+                int money = rand.nextInt(10) + 60;
+                Customer customer = new Customer(cashier, fuelAmount, money);
                 new Thread(customer).start();
 
                 try {
