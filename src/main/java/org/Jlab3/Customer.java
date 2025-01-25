@@ -1,4 +1,4 @@
-package org.example;
+package org.Jlab3;
 
 public class Customer implements Runnable {
     private final Cashier cashier;

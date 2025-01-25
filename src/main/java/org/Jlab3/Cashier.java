@@ -1,4 +1,4 @@
-package org.example;
+package org.Jlab3;
 
 import java.util.Arrays;
 import java.util.concurrent.ArrayBlockingQueue;

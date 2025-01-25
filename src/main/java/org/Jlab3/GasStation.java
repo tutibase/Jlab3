@@ -1,4 +1,4 @@
-package org.example;
+package org.Jlab3;
 
 import java.util.Random;
 
@@ -16,7 +16,7 @@ public class GasStation {
                 new Thread(customer).start();
 
                 try {
-                    Thread.sleep(rand.nextInt(300) + 100); // Интервал между приходом клиентов
+                    Thread.sleep(rand.nextInt(300)); // Интервал между приходом клиентов
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }

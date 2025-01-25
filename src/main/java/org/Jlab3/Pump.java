@@ -1,4 +1,4 @@
-package org.example;
+package org.Jlab3;
 
 public class Pump implements Runnable {
     private final int pumpId;
