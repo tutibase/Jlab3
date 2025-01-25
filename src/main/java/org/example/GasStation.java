@@ -11,10 +11,15 @@ public class GasStation {
         // Создаем поток клиентов
         Thread customerThread = new Thread(() -> {
             while (true) {
-                int fuelAmount = rand.nextInt(50) + 1;
+                int fuelAmount = rand.nextInt(5) + 1;
                 Customer customer = new Customer(cashier, fuelAmount);
                 new Thread(customer).start();
 
+                try {
+                    Thread.sleep(rand.nextInt(300) + 100); // Интервал между приходом клиентов
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
             }
         });
         customerThread.start();
